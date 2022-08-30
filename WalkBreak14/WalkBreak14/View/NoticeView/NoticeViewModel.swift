@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+final class NoticeViewModel: ObservableObject {
+    
+    // Model
+    private let noticeManager = NoticeManager()
+    
+    // 通知を入れる配列
+    @Published var noticeArray: [Notice] = []
+    
+    init() {
+        // 起動時に反映
+        self.noticeArray = noticeManager.getNotice()
+    }
+}
