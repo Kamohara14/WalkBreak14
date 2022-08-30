@@ -8,63 +8,73 @@
 import SwiftUI
 
 struct HomeView: View {
+    // viewModel
     @StateObject var viewModel = HomeViewModel.init()
     
     var body: some View {
-        VStack {
-            // 通知
-            if viewModel.restViewFlag {
-                restNotificationView()
-            }
+        ZStack {
             
-            Spacer()
+            Color.green.ignoresSafeArea(edges: .top)
+            Color.white
             
-            // 休憩時間
             VStack {
-                HStack {
-                    Text("休憩時間残り")
-                    Spacer()
-                }
-                .padding()
                 
+                Spacer()
+                
+                // 通知
                 if viewModel.restViewFlag {
-                    Text("\(viewModel.restTime - viewModel.timerCount)秒")
-                        .font(.largeTitle)
-                        .padding(.bottom, 50)
-                } else {
-                    Text("休憩完了")
-                        .font(.largeTitle)
-                        .padding(.bottom, 50)
+                    restNotificationView()
                 }
                 
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(red: 0.9, green: 0.9, blue: 0.9))
-            )
-            .padding()
-            
-            // 休憩開始
-            if viewModel.restViewFlag {
-                Button {
-                    viewModel.startRest()
-                } label: {
-                    Text(" --- 休憩開始 --- ")
-                        .foregroundColor(.white)
+                Spacer()
+                
+                // 休憩時間
+                VStack {
+                    HStack {
+                        Text("休憩時間残り")
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    if viewModel.restViewFlag {
+                        Text("\(viewModel.restTime - viewModel.timerCount)秒")
+                            .font(.largeTitle)
+                            .padding(.bottom, 50)
+                    } else {
+                        Text("休憩完了")
+                            .font(.largeTitle)
+                            .padding(.bottom, 50)
+                    }
+                    
                 }
-                .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.green)
+                        .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
                 )
-                .disabled(viewModel.isRest)
+                .padding()
                 
-            }
-            
-            Spacer()
-            Text("歩数：\(viewModel.stepCount)")
-            Spacer()
-        } // VS
+                // 休憩開始
+                if viewModel.restViewFlag {
+                    Button {
+                        viewModel.startRest()
+                    } label: {
+                        Text(" --- 休憩開始 --- ")
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.green)
+                    )
+                    .disabled(viewModel.isRest)
+                    
+                }
+                
+                Spacer()
+                Text("歩数：\(viewModel.steps)")
+                Spacer()
+            } // VS
+        } // ZS
     }
 }
 

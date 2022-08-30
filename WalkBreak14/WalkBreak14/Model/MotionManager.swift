@@ -36,7 +36,11 @@ final class MotionManager {
     
     // MARK: - step
     // 歩数
-    private var step = 0
+    private var step: Int {
+        didSet {
+            UserDefaults.standard.set(step, forKey: "steps")
+        }
+    }
     
     // MARK: - Notification
     // 水分通知
@@ -45,7 +49,12 @@ final class MotionManager {
     private var restFlag = false
     
     private init() {
+        // モーションマネージャーを入れる
         motion = CMMotionManager()
+        
+        // 歩数を入れる
+        print("\(UserDefaults.standard.integer(forKey: "steps"))")
+        step = UserDefaults.standard.integer(forKey: "steps")
     }
     
     func updateMotion(handler: @escaping (Int, Bool, Bool) -> Void) {
@@ -118,6 +127,7 @@ final class MotionManager {
             count = 0
             // 歩数を+1する
             step += 1
+            
             print("step!!!")
             
             // 1500歩ごとに水分補給の通知
@@ -157,5 +167,10 @@ final class MotionManager {
     func stopMotion() {
         // 計測停止
         motion.stopDeviceMotionUpdates()
+    }
+    
+    func resetStep() {
+        // 歩数リセット
+        step = 0
     }
 }

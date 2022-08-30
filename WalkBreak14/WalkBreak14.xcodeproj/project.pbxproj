@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F34BDE228B45DD8006AA877 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F34BDE128B45DD8006AA877 /* NoticeView.swift */; };
 		7F36170328AE108900FA4AEF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36170228AE108900FA4AEF /* HomeViewModel.swift */; };
 		7F36170528AE13B600FA4AEF /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36170428AE13B600FA4AEF /* MotionManager.swift */; };
 		7FB3F62728AB1BA20024ADA7 /* WalkBreak14App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F62628AB1BA20024ADA7 /* WalkBreak14App.swift */; };
@@ -17,9 +18,14 @@
 		7FB3F63F28AB1EE80024ADA7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F63E28AB1EE80024ADA7 /* HomeView.swift */; };
 		7FB3F64128AB2E190024ADA7 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F64028AB2E190024ADA7 /* RecordView.swift */; };
 		7FB3F64328AB2E3B0024ADA7 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F64228AB2E3B0024ADA7 /* ManualView.swift */; };
+		7FC3085428B7398400783CEB /* NoticeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3085328B7398400783CEB /* NoticeManager.swift */; };
+		7FC3085A28B7515900783CEB /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3085928B7515900783CEB /* SettingView.swift */; };
+		7FC3085C28B760F500783CEB /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3085B28B760F500783CEB /* NoticeViewModel.swift */; };
+		7FC3085E28B857D000783CEB /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3085D28B857D000783CEB /* SettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F34BDE128B45DD8006AA877 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		7F36170228AE108900FA4AEF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7F36170428AE13B600FA4AEF /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		7F36170628AF59DE00FA4AEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -32,6 +38,10 @@
 		7FB3F63E28AB1EE80024ADA7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7FB3F64028AB2E190024ADA7 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		7FB3F64228AB2E3B0024ADA7 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
+		7FC3085328B7398400783CEB /* NoticeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManager.swift; sourceTree = "<group>"; };
+		7FC3085928B7515900783CEB /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		7FC3085B28B760F500783CEB /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoticeViewModel.swift; path = WalkBreak14/View/NoticeViewModel.swift; sourceTree = SOURCE_ROOT; };
+		7FC3085D28B857D000783CEB /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +98,7 @@
 			children = (
 				7FB3F63C28AB1D930024ADA7 /* WalkBreakView.swift */,
 				7FB3F63928AB1C8C0024ADA7 /* NoticeView */,
+				7FC3085828B7513E00783CEB /* SettingView */,
 				7FB3F63628AB1BFB0024ADA7 /* HomeView */,
 				7FB3F63728AB1C030024ADA7 /* RecordView */,
 				7FB3F63828AB1C280024ADA7 /* ManualView */,
@@ -99,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				7F36170428AE13B600FA4AEF /* MotionManager.swift */,
+				7FC3085328B7398400783CEB /* NoticeManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -131,8 +143,19 @@
 		7FB3F63928AB1C8C0024ADA7 /* NoticeView */ = {
 			isa = PBXGroup;
 			children = (
+				7F34BDE128B45DD8006AA877 /* NoticeView.swift */,
+				7FC3085B28B760F500783CEB /* NoticeViewModel.swift */,
 			);
 			path = NoticeView;
+			sourceTree = "<group>";
+		};
+		7FC3085828B7513E00783CEB /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				7FC3085928B7515900783CEB /* SettingView.swift */,
+				7FC3085D28B857D000783CEB /* SettingViewModel.swift */,
+			);
+			path = SettingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,9 +229,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FB3F63D28AB1D930024ADA7 /* WalkBreakView.swift in Sources */,
+				7FC3085E28B857D000783CEB /* SettingViewModel.swift in Sources */,
 				7F36170528AE13B600FA4AEF /* MotionManager.swift in Sources */,
 				7FB3F63F28AB1EE80024ADA7 /* HomeView.swift in Sources */,
+				7F34BDE228B45DD8006AA877 /* NoticeView.swift in Sources */,
+				7FC3085428B7398400783CEB /* NoticeManager.swift in Sources */,
 				7F36170328AE108900FA4AEF /* HomeViewModel.swift in Sources */,
+				7FC3085A28B7515900783CEB /* SettingView.swift in Sources */,
+				7FC3085C28B760F500783CEB /* NoticeViewModel.swift in Sources */,
 				7FB3F64328AB2E3B0024ADA7 /* ManualView.swift in Sources */,
 				7FB3F62928AB1BA20024ADA7 /* ContentView.swift in Sources */,
 				7FB3F64128AB2E190024ADA7 /* RecordView.swift in Sources */,

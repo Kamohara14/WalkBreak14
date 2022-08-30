@@ -9,103 +9,76 @@ import SwiftUI
 
 struct WalkBreakView: View {
     
-    // TabView変更用のイニシャライザ
-    init(){
-        // TabViewの背景色の設定（緑色）
-        UITabBar.appearance().backgroundColor = .systemGreen
-        // 非選択のタブ
-        UITabBar.appearance().unselectedItemTintColor = .white
+    // View変更用のイニシャライザ
+    init() {
+        // NavigationView
+        // 背景の色
+        UINavigationBar.appearance().backgroundColor = .systemGreen
+        // backの色
+        UINavigationBar.appearance().tintColor = .white
         
+        // TabView
+        // 背景色の設定（緑色）
+        UITabBar.appearance().backgroundColor = .systemGray6
+        // 非選択のタブ
+        UITabBar.appearance().unselectedItemTintColor = .systemGray2
     }
     
     var body: some View {
-        VStack {
-            WalkBreakHeader()
-            
-            TabView {
-                HomeView()
-                    .tabItem {
-                        Image(systemName: "house")
-                        Text("ホーム")
-                    }
+        NavigationView {
+            ZStack {
                 
-                RecordView()
-                    .tabItem {
-                        Image(systemName: "list.bullet")
-                        Text("記録")
+                VStack {
+                    footerView()
+                } // VS
+                .navigationTitle("")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    // タイトル
+                    ToolbarItem(placement: .navigationBarLeading){
+                        Text("ぶれいくたいむ")
+                            .foregroundColor(.white)
+                            .fontWeight(.black)
+                            .font(.title)
                     }
-                
-                ManualView()
-                    .tabItem {
-                        Image(systemName: "lightbulb")
-                        Text("休憩マニュアル")
-                    }
-                
-            }
-            .accentColor(.blue)
-        }
-    }
+                    
+                    
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        // 通知ボタン
+                        Button {
+                            
+                        } label: {
+                            NavigationLink(destination: NoticeView()) {
+                                Image(systemName: "bell.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height:30)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        
+                        // 設定ボタン
+                        Button {
+                            
+                        } label: {
+                            NavigationLink(destination: SettingView()) {
+                                Image(systemName: "gearshape.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .padding(10)
+                    } // ItemGroup
+                    
+                } // ToolBar
+                .background(Color.green)
+            } // ZS
+        } // Nav
+    } // body
 }
 
-// ヘッダー
-struct WalkBreakHeader: View {
-    // View
-    private let view = WalkBreakView()
-    
-    var body: some View {
-        VStack {
-            HStack {
-                // タイトル
-                Text("ぶれいくたいむ")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding()
-                
-                Spacer()
-                
-                HStack {
-                    // 通知ボタン
-                    Button {
-                        
-                    } label: {
-                        Circle()
-                            .fill(Color(red: 0.9, green: 0.9, blue: 0.9))
-                            .frame(width: 40, height: 40)
-                            .overlay(
-                                Image(systemName: "bell")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.green)
-                            )
-                    }
-                    .padding(3)
-                    
-                    // 設定ボタン
-                    Button {
-                        
-                    } label: {
-                        Circle()
-                            .fill(Color(red: 0.9, green: 0.9, blue: 0.9))
-                            .frame(width: 40, height: 40)
-                            .overlay(
-                                Image(systemName: "text.justify")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.green)
-                            )
-                    }
-                    .padding(3)
-                    
-                } // HS
-                .padding(.trailing, 5)
-            } // HS
-            
-        } // VS
-        .background(.green)
-    }
-}
 
 
 struct WalkBreakView_Previews: PreviewProvider {
@@ -113,3 +86,30 @@ struct WalkBreakView_Previews: PreviewProvider {
         WalkBreakView()
     }
 }
+
+struct footerView: View {
+    var body: some View {
+        TabView {
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("ホーム")
+                }
+            
+            RecordView()
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text("記録")
+                }
+            
+            ManualView()
+                .tabItem {
+                    Image(systemName: "lightbulb")
+                    Text("休憩マニュアル")
+                }
+            
+        } // Tab
+        .accentColor(.green)
+    }
+} // footer
+

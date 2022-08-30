@@ -9,24 +9,30 @@ import SwiftUI
 
 struct ManualView: View {
     var body: some View {
-        VStack {
+        ZStack {
             
-            RestView()
-                .padding(8)
+            Color.green.ignoresSafeArea(edges: .top)
+            Color.white
             
-            HydrationView()
-                .padding(8)
-            
-            ConditionView()
-                .padding(8)
-            
-        }
-        .background(
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color(red: 0.4, green: 0.6, blue: 1.0))
-        )
-        .padding()
-    }
+            VStack {
+                
+                RestView()
+                    .padding(8)
+                
+                HydrationView()
+                    .padding(8)
+                
+                ConditionView()
+                    .padding(8)
+                
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color(red: 0.4, green: 0.6, blue: 1.0))
+            )
+            .padding()
+        } // VS
+    } // ZS
     
     struct ManualView_Previews: PreviewProvider {
         static var previews: some View {

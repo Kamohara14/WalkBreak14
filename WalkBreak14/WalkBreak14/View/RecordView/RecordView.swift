@@ -9,11 +9,17 @@ import SwiftUI
 
 struct RecordView: View {
     var body: some View {
-        VStack {
-            // TODO: 記録用のView作成
-            Text("準備中...")
+        ZStack {
+            
+            Color.green.ignoresSafeArea(edges: .top)
+            Color.white
+            
+            VStack {
+                // TODO: 記録用のView作成
+                Text("準備中...")
                 
-        }
+            } // VS
+        }// ZS
     }
 }
 
