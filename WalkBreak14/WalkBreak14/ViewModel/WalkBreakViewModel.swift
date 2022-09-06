@@ -22,24 +22,14 @@ final class WalkBreakViewModel: ObservableObject {
     @Published var isWalking = false
     
     // MARK: - Notification
-    // 水分通知
-    @Published var moistureFlag = false
-    // 休憩通知(ローカル)
-    @Published var restFlag = false
     // 休憩通知(画面上)
     @Published var restViewFlag: Bool {
         didSet {
             UserDefaults.standard.set(restViewFlag, forKey: "restViewFlag")
         }
     }
-    // 通知許可
-    @Published var noticePermit: Bool {
-        didSet {
-            UserDefaults.standard.set(noticePermit, forKey: "noticePermit")
-        }
-    }
     // 通知を入れる配列
-    @Published var noticeArray: [Notice] = NoticeManager().getNotice()
+    @Published var noticeArray: [Notice] = []
     
     // MARK: - timer
     // 休憩秒数
@@ -54,31 +44,18 @@ final class WalkBreakViewModel: ObservableObject {
     
     // MARK: - record
     // 記録を入れる配列
-    @Published var recordArray: [Record] = RecordManager().getRecode()
+    @Published var recordArray: [Record] = []
     
     init() {
         // 休憩通知を反映
         restViewFlag = UserDefaults.standard.bool(forKey: "restViewFlag")
         
-        // 通知の設定状況を反映
-        noticePermit = UserDefaults.standard.bool(forKey: "noticePermit")
-        
-        // 歩数計測開始
-        updateSteps()
+        // 歩数計測とデータの更新を開始
+        update()
     }
     
-    // 通知履歴の更新
-    func updateNotice() {
-        self.noticeArray = noticeManager.getNotice()
-    }
-    
-    // 休憩記録の更新
-    func updateRecord() {
-        self.recordArray = recordManager.getRecode()
-    }
-    
-    // 歩数計測
-    func updateSteps() {
+    // データ更新
+    func update() {
         guard !isWalking else { return }
         isWalking = true
         
@@ -87,23 +64,23 @@ final class WalkBreakViewModel: ObservableObject {
                 // 歩数を受け取る
                 self.steps = count
                 
-                // 通知判定を受け取る
-                self.moistureFlag = moisture
-                self.restFlag = rest
+                // データの更新処理
+                self.noticeArray = self.noticeManager.getNotice()
+                self.recordArray = self.recordManager.getRecode()
                 
                 // 水分補給の通知
                 if moisture {
+                    // 通知をリクエスト
                     self.noticeManager.makeNotification(isMoisture: true)
-                    print("水分補給通知")
                 }
                 // 休憩の通知
                 if rest {
+                    // 通知をリクエスト
                     self.noticeManager.makeNotification(isMoisture: false)
                     // 画面上の通知もONにする
                     self.restViewFlag = true
-                    // 通知を追加
+                    // View上に通知を表示
                     self.noticeManager.addNotice(title: "休憩することをおすすめします")
-                    print("休憩通知")
                 }
                 
             }

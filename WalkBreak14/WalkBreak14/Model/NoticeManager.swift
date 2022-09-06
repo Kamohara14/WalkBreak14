@@ -17,20 +17,14 @@ struct Notice: Identifiable, Codable {
 final class NoticeManager {
     
     // 通知を入れる配列
-    private var noticeArray: [Notice] = [
-        Notice(title: "通知タイトル", date: "日付"),
-        Notice(title: "通知タイトル", date: "日付"),
-        Notice(title: "通知タイトル", date: "日付"),
-        Notice(title: "通知タイトル", date: "日付"),
-        Notice(title: "通知タイトル", date: "日付")
-    ] {
+    private var noticeArray: [Notice] = [] {
         didSet {
             saveNotice(data: noticeArray)
         }
     }
     
     // 通知許可が取れたかどうか
-    private var noticePermit: Bool = false
+    private var noticePermit = false
     
     init() {
         
@@ -41,18 +35,30 @@ final class NoticeManager {
             }
         }
         
+        // 通知許可
+        permitNotification()
+        
+        // 通知の設定状況を反映
+        noticePermit = UserDefaults.standard.bool(forKey: "noticePermit")
+    }
+    
+    func permitNotification() {
+        // 通知のリセット
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         // 通知を許諾するかどうか表示する(初使用時のみ)
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound, .badge]){
-            (granted, error) in
-            // エラーが発生したら戻す
-            if error != nil {
-                print("エラー：\(String(describing: error))")
-                return
-            }
-            // 許諾内容を反映する
-            print("通知初期化完了")
-            DispatchQueue.main.async {
-                self.noticePermit = granted
+            (granted, _) in
+            // 通知を許可していなかったら返す
+            if granted {
+                // 通知が許可されている
+                self.noticePermit = true
+                print("通知ON")
+                
+            } else {
+                // 通知が許可されていない
+                self.noticePermit = false
+                print("通知OFF")
+                
             }
         }
     }
@@ -65,20 +71,20 @@ final class NoticeManager {
             return
         }
         
-        //通知タイミング(即時に通知する, 繰り返さない)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        //通知の内容
+        // 通知タイミング(即時に通知する, 繰り返さない)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // 通知の内容
         let content = UNMutableNotificationContent()
         // identifier
-        var identifier = "notification"
+        let identifier: String
         
         if isMoisture {
-            // 水分補給通知のタイトル
+            // 水分補給の通知
             content.title = "水分補給をして下さい"
             identifier = "notification_moisture"
             
         } else {
-            // 休憩通知のタイトル
+            // 休憩の通知
             content.title = "休憩することをおすすめします"
             identifier = "notification_rest"
             
@@ -93,8 +99,11 @@ final class NoticeManager {
         //リクエスト作成
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         //リクエスト実行
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        UNUserNotificationCenter.current().add(request)
     }
+    
+    
+    
     
     func addNotice(title: String) {
         // 通知が10以上なら古い通知から削除する

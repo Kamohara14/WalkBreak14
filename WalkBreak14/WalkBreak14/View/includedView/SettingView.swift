@@ -19,11 +19,7 @@ struct SettingView: View {
             VStack {
                 Spacer()
                 Form {
-                    Section(header: Text("通知許可")) {
-                        Toggle(isOn: $viewModel.noticePermit) {
-                            Text(viewModel.noticePermit ? "通知ON" : "通知OFF")
-                        }
-                    } // Section
+                    // TODO: 設定画面
                 } // Form
             } // VS
         } // ZS

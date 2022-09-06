@@ -16,13 +16,7 @@ struct Record: Identifiable, Codable {
 final class RecordManager {
     
     // 記録を入れる配列
-    private var recordArray: [Record]  = [
-        Record(date: "日付", content: "内容"),
-        Record(date: "日付", content: "内容"),
-        Record(date: "日付", content: "内容"),
-        Record(date: "日付", content: "内容"),
-        Record(date: "日付", content: "内容")
-    ] {
+    private var recordArray: [Record]  = [] {
         didSet {
             saveRecode(data: recordArray)
         }

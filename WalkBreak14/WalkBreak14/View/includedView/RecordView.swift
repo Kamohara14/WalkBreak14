@@ -30,9 +30,6 @@ struct RecordView: View {
                 } // Scroll
             } // VS
         }// ZS
-        .onAppear {
-            viewModel.updateRecord()
-        }
     }
 }
 

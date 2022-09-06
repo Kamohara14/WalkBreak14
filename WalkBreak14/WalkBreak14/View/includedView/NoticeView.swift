@@ -29,9 +29,6 @@ struct NoticeView: View {
                 } // Scroll
             } // VS
         } // ZS
-        .onAppear {
-            viewModel.updateNotice()
-        }
     }
 }
 
