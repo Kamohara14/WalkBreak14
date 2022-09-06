@@ -24,12 +24,15 @@ struct WalkBreakView: View {
         UITabBar.appearance().unselectedItemTintColor = .systemGray2
     }
     
+    // ViewModel
+    @StateObject var viewModel = WalkBreakViewModel()
+    
     var body: some View {
         NavigationView {
             ZStack {
                 
                 VStack {
-                    footerView()
+                    footerView(viewModel: viewModel)
                 } // VS
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
@@ -48,7 +51,7 @@ struct WalkBreakView: View {
                         Button {
                             
                         } label: {
-                            NavigationLink(destination: NoticeView()) {
+                            NavigationLink(destination: NoticeView(viewModel: viewModel)) {
                                 Image(systemName: "bell.fill")
                                     .resizable()
                                     .scaledToFit()
@@ -61,7 +64,7 @@ struct WalkBreakView: View {
                         Button {
                             
                         } label: {
-                            NavigationLink(destination: SettingView()) {
+                            NavigationLink(destination: SettingView(viewModel: viewModel)) {
                                 Image(systemName: "gearshape.fill")
                                     .resizable()
                                     .scaledToFit()
@@ -88,15 +91,18 @@ struct WalkBreakView_Previews: PreviewProvider {
 }
 
 struct footerView: View {
+    
+    @ObservedObject var viewModel: WalkBreakViewModel
+    
     var body: some View {
         TabView {
-            HomeView()
+            HomeView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "house")
                     Text("ホーム")
                 }
             
-            RecordView()
+            RecordView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("記録")

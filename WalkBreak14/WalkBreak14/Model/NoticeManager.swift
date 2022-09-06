@@ -36,7 +36,9 @@ final class NoticeManager {
         
         // 通知を入れる
         if let data = UserDefaults.standard.data(forKey: "userNotice") {
-            noticeArray = try! JSONDecoder().decode([Notice].self, from: data)
+            if let getData = try? JSONDecoder().decode([Notice].self, from: data) {
+                noticeArray = getData
+            }
         }
         
         // 通知を許諾するかどうか表示する(初使用時のみ)
@@ -95,7 +97,7 @@ final class NoticeManager {
     }
     
     func addNotice(title: String) {
-        // 通知が20以上なら古い通知から削除する
+        // 通知が10以上なら古い通知から削除する
         if noticeArray.count > 9 {
             for num in 9..<noticeArray.count {
                 noticeArray.remove(at: num)
@@ -122,7 +124,7 @@ final class NoticeManager {
         return noticeArray
     }
     
-    // カスタムクラスの保存
+    // 通知クラスの保存
     private func saveNotice(data: [Notice]) {
         guard let data = try? JSONEncoder().encode(data) else { return }
         UserDefaults.standard.set(data, forKey: "userNotice")
